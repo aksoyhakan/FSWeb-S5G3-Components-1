@@ -128,9 +128,25 @@ function haberYapici(array) {
     const spanButton = document.createElement("span");
     spanButton.classList.add("expandButton");
     spanButton.textContent = "+";
+
     spanButton.addEventListener("click", (event) => {
-      event.target.parentElement.classList.toggle("article-open");
+      let acikBolum = document.querySelector(".article-open");
+      if (acikBolum == null) {
+        event.target.parentElement.classList.add("article-open");
+        event.target.textContent = "-";
+      } else {
+        if (event.target.parentElement.classList.contains("article-open")) {
+          event.target.parentElement.classList.remove("article-open");
+          event.target.textContent = "+";
+        } else {
+          acikBolum.classList.remove("article-open");
+          acikBolum.querySelector("span").textContent = "+";
+          event.target.parentElement.classList.add("article-open");
+          event.target.textContent = "-";
+        }
+      }
     });
+
     division.appendChild(heading);
     division.appendChild(date);
     division.appendChild(firstParagraph);
